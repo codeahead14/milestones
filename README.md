@@ -16,14 +16,14 @@ Milestones is a Clojure library that needs your project tasks description in ord
 The following constraints can be set on the tasks:
 - Resources: Reseources required to perform the task
 - The task duration 
-- Predecessors: assign precedence order of tasks.
+- Predecessors: assign precedence order to tasks.
 
-Based on the above constraints specification, Milestones generates the
-Schedule if it does not detect scheduling errors, or shows you what it
-does not like.
+Based on the above constraints, Milestones generates the
+Schedule provided there are no errors and all constraints are 
+as required.
 
-Tasks are basically a map containing IDs as keys and information about
-the tasks as values - Information about a task is itself a  map of
+Tasks are basically a map containing IDs as keys and task information
+as values. Task information is itself a  map of
 associating fields to values- Here is an example :
 
 ```Clojure
@@ -38,10 +38,10 @@ associating fields to values- Here is an example :
       :predecessors [1]}}
 ```
 
-Milestones tries to detect any circular dependencies, that is, tasks
+Milestones also detects any circular dependencies, i.e., tasks
 that depend on themselves or tasks that end up depending on
-themselves; actually, the tasks definition must be a directed non
-cyclical graph.
+themselves. This is not allowed and it should be ensured that the 
+tasks definition is a non cyclical graph.
 
 Tasks (that are not milestones) without resource-ids won't be scheduled. Those will be reported as erroneous.
 
